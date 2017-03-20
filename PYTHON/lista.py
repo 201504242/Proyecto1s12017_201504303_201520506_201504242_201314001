@@ -1,3 +1,4 @@
+import os
 class Nodo(object):
 	"""docstring for Nodo"""
 	def __init__(self, valor,indice):
@@ -62,3 +63,18 @@ class Lista(object):
 					break
 				auxiliar = auxiliar.siguiente
 		print("Eliminado valor")
+
+	def report(self):
+		coladot = open("lista.dot","w")
+		auxiliar = self.getPrimero()
+		cadena = "rankdir=LR; \n node [shape=box];\n node [style=filled]; \n node [fillcolor=\"#31CEF0\"];\n node [color=\"#31CEF0\"];\n edge [color=\"#31CEF0\"];"
+		apuntadores = ""
+		while auxiliar!=None:
+			cadena = cadena +"\n"+ str(auxiliar.getIndice()) + "[label=\"" + str(auxiliar.getValor()) + "\"];"
+			if auxiliar.getSiguiente() != None:
+				apuntadores = apuntadores + "\n" + str(auxiliar.getIndice()) + " -> " +str(auxiliar.getSiguiente().getIndice()) + ";"
+			auxiliar = auxiliar.getSiguiente()
+
+		coladot.write("digraph G { \n" + cadena + "\n" + apuntadores + "\n }")
+		coladot.close()
+		os.system("lista.bat")

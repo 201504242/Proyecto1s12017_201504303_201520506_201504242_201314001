@@ -1,4 +1,5 @@
 import os
+import lista
 class Nodo(object):
 	"""docstring for Nodo"""
 	def __init__(self,empresa,departamento,nombre):
@@ -12,6 +13,7 @@ class Nodo(object):
 		self.izquierda = None
 		self.arriba = None
 		self.abajo = None
+		self.usuarios = lista.Lista()
 
 class Matriz(object):
 	"""docstring for Matriz"""
@@ -31,8 +33,10 @@ class Matriz(object):
 			self.ampliarColumna()
 			self.ampliarFila()
 			self.getNodo(1,1).nombre = nombre
+			self.getNodo(1,1).usuarios.insertar(nombre)
 			self.getNodo(1,0).empresa = empresa
 			self.getNodo(0,1).departamento = departamento
+
 		else:
 			if self.empresaExistente(empresa) == None :
 				if self.departamentoExistente(departamento) == None:
@@ -43,8 +47,33 @@ class Matriz(object):
 					self.ampliarFila()
 					nodo = self.getNodo(self.lengthX,self.lengthY)
 					nodo.nombre = nombre
+					nodo.usuarios.insertar(nombre)
 					self.getNodo(self.lengthX,0).empresa = empresa
 					self.getNodo(0,self.lengthY).departamento = departamento
+				else:
+					self.lengthX += 1
+					self.amplicarCabeceras()
+					self.ampliarColumna()
+					departamento = self.departamentoExistente(departamento)
+					nodo = self.getNodo(self.lengthX,departamento.y)
+					nodo.nombre = nombre
+					self.getNodo(self.lengthX,0).empresa = empresa
+			else:
+				if self.departamentoExistente(departamento) == None:
+					self.lengthY += 1
+					self.amplicarCabeceras()
+					self.ampliarFila()
+					empresa = self.empresaExistente(empresa)
+					nodo = self.getNodo(empresa.x,self.lengthY)
+					nodo.nombre = nombre
+					self.getNodo(0,self.lengthY).departamento = departamento
+				else:
+					empresa = self.empresaExistente(empresa)
+					departamento = self.departamentoExistente(departamento)
+					nodo = self.getNodo(empresa.x,departamento.y)
+					#nodo.nombre = nombre
+					nodo.usuarios.insertar(nombre)
+					nodo.usuarios.report() 
 #----------------------------------------------Metodo para Reporte
 	def report(self):
 		matrizdot = open("matriz.dot","w")
@@ -174,6 +203,10 @@ class Matriz(object):
 m = Matriz()
 m.Insertar("glorsys","conta","lucas")
 m.Insertar("ofert","ope","marcos")
+m.Insertar("cops","secretaria","paula")
+m.Insertar("nueva","secretaria","ricarda")
+m.Insertar("nueva","notariado","denis")
+m.Insertar("glorsys","conta","Antonio")
 m.report()
 #m.Insertar("oferta","df","lucas")
 #print(m.getNodo(1,1).empresa)
