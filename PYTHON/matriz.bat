@@ -1,0 +1,1 @@
+C:\practica1edd\bin\dot.exe -Tjpg matriz.dot -o matriz.jpg
