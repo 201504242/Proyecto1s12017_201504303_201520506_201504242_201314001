@@ -57,6 +57,7 @@ class Matriz(object):
 					departamento = self.departamentoExistente(departamento)
 					nodo = self.getNodo(self.lengthX,departamento.y)
 					nodo.nombre = nombre
+					nodo.usuarios.insertar(nombre)
 					self.getNodo(self.lengthX,0).empresa = empresa
 			else:
 				if self.departamentoExistente(departamento) == None:
@@ -66,6 +67,7 @@ class Matriz(object):
 					empresa = self.empresaExistente(empresa)
 					nodo = self.getNodo(empresa.x,self.lengthY)
 					nodo.nombre = nombre
+					nodo.usuarios.insertar(nombre)
 					self.getNodo(0,self.lengthY).departamento = departamento
 				else:
 					empresa = self.empresaExistente(empresa)
