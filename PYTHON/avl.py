@@ -1,3 +1,4 @@
+import os
 class Nodo(object):
 	
 	def __init__(self,id,nombre,descripcion,idActivo):
@@ -111,15 +112,23 @@ class Arbol(object):
 		self.length += 1
 #--------------------------------------------- Recorrido
 	#Retornar el nodo donde se encuentra el id que se le mando
-	def inOrden(self,r,ide):
-		if r != None:
-			self.inOrden(r.hijoIzquierdo,ide)
-			print(r.nombre)
-			#if int(r.id) == int(id):
-			#	print(r.id)
-			#	return r
-			self.inOrden(r.hijoDerecho,ide)
-		return "fin"
+	def inOrden(self,raiz):
+		activos = ""
+		if raiz != None:
+			activos += self.inOrden(raiz.hijoIzquierdo)
+			activos += str(raiz.id)+"[label=\""+raiz.nombre+"\"]"+"\n"
+			activos += self.inOrden(raiz.hijoDerecho)
+		return activos
+
+	def punteros(self,raiz):
+		activos = ""
+		if raiz != None:
+			if raiz.hijoIzquierdo!=None:
+				activos += str(raiz.id) + "->" + self.punteros(raiz.hijoIzquierdo)
+			if raiz.hijoDerecho!=None:
+				activos += str(raiz.id) + "->" + self.punteros(raiz.hijoDerecho)
+			activos += str(raiz.id) + "\n"
+		return activos
 
 	def buscarIDactivo(self,palabra,raiz):
 		if raiz != None:
@@ -130,13 +139,30 @@ class Arbol(object):
 			if self.buscarIDactivo(palabra,raiz.hijoDerecho) != None:
 				return self.buscarIDactivo(palabra,raiz.hijoDerecho)
 
-#arbolAVL = Arbol()
-#arbolAVL.insertarNUEVO("a","Esto es la prueba 1","ds")
-#arbolAVL.insertarNUEVO("b","Esto es la prueba 2","d")
-#arbolAVL.insertarNUEVO("c","Esto es la prueba 3","kdk")
-#arbolAVL.insertarNUEVO("d","Esto es la prueba 4","fjfjf")
-#arbolAVL.insertarNUEVO("e","Esto es la prueba 5","jdjdjdjd")
-#arbolAVL.insertarNUEVO("f","Esto es la prueba 6","jajaja")
-#arbolAVL.insertarNUEVO("j","Esto es la prueba 7","jajaja")
+#---------------------------------------------- Graficar
+	def report(self,raiz):
+		avldot = open("avl.dot","w")
+		nodos = self.inOrden(raiz)
+		punteros = self.punteros(raiz)
+		avldot.write("digraph G { \n" +nodos +"\n" + punteros+"\n }")
+		avldot.close()
+		
+
+arbolAVL = Arbol()
+arbolAVL.insertarNUEVO("a","Esto es la prueba 1","ds")
+arbolAVL.insertarNUEVO("b","Esto es la prueba 2","d")
+arbolAVL.insertarNUEVO("c","Esto es la prueba 3","kdk")
+arbolAVL.insertarNUEVO("d","Esto es la prueba 4","fjfjf")
+arbolAVL.insertarNUEVO("e","Esto es la prueba 5","jdjdjdjd")
+arbolAVL.insertarNUEVO("f","Esto es la prueba 6","jajaja")
+arbolAVL.insertarNUEVO("j","Esto es la prueba 7","jajaja")
+arbolAVL.insertarNUEVO("a","Esto es la prueba 1","ds")
+arbolAVL.insertarNUEVO("b","Esto es la prueba 2","d")
+arbolAVL.insertarNUEVO("c","Esto es la prueba 3","kdk")
+arbolAVL.insertarNUEVO("d","Esto es la prueba 4","fjfjf")
+arbolAVL.insertarNUEVO("e","Esto es la prueba 5","jdjdjdjd")
+arbolAVL.insertarNUEVO("f","Esto es la prueba 6","jajaja")
+arbolAVL.insertarNUEVO("j","Esto es la prueba 7","jajaja")
+arbolAVL.report(arbolAVL.raiz)
 #print(arbolAVL.buscarIDactivo("b",arbolAVL.raiz).id)
 

@@ -1,0 +1,1 @@
+C:\practica1edd\bin\dot.exe -Tjpg avl.dot -o avl.jpg
