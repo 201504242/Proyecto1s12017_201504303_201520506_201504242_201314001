@@ -2,8 +2,11 @@ import os
 import avl
 class Nodo(object):
 	"""docstring for Nodo"""
-	def __init__(self, valor,indice):
+	def __init__(self, valor,indice,usuario,password):
+		#Valor es igual al nombre para no editar todo
 		self.valor=valor
+		self.usuario = usuario
+		self.password = password
 		self.indice=indice
 		self.siguiente = None
 		self.arbol = avl.Arbol()
@@ -29,8 +32,8 @@ class Lista(object):
 	def getPrimero(self):
 		return self.primero
 
-	def insertar(self,valor):
-		nuevo = Nodo(valor,self.length)
+	def insertar(self,valor,usuario,password):
+		nuevo = Nodo(valor,self.length,usuario,password)
 		if self.primero == None:
 			self.primero = nuevo
 		else:
@@ -46,6 +49,22 @@ class Lista(object):
 		auxiliar = self.primero
 		while auxiliar != None:
 			if auxiliar.getValor() == valor:
+				return auxiliar
+			auxiliar = auxiliar.siguiente
+		return None
+
+	def buscarUsuario(self,usuario):
+		auxiliar = self.primero
+		while auxiliar != None:
+			if auxiliar.usuario == usuario:
+				return auxiliar
+			auxiliar = auxiliar.siguiente
+		return None
+
+	def login(self,usuario,password):
+		auxiliar = self.primero
+		while auxiliar != None:
+			if (str(auxiliar.usuario) == str(usuario)) and (str(auxiliar.password) == str(password)) :
 				return auxiliar
 			auxiliar = auxiliar.siguiente
 		return None

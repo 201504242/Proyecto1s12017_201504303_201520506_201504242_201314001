@@ -23,7 +23,7 @@ class Matriz(object):
 		self.lengthX = 0
 		self.lengthY = 0
 #----------------------------------------------Metodo Insertar
-	def Insertar(self,empresa,departamento,nombre):
+	def Insertar(self,empresa,departamento,nombre,usuario,password):
 		nuevo = Nodo(empresa,departamento,nombre)
 		#Comprobamos si esta vacia la matriz
 		if self.primero.derecha == None:
@@ -33,7 +33,7 @@ class Matriz(object):
 			self.ampliarColumna()
 			self.ampliarFila()
 			self.getNodo(1,1).nombre = nombre
-			self.getNodo(1,1).usuarios.insertar(nombre)
+			self.getNodo(1,1).usuarios.insertar(nombre,usuario,password)
 			self.getNodo(1,0).empresa = empresa
 			self.getNodo(0,1).departamento = departamento
 
@@ -47,7 +47,7 @@ class Matriz(object):
 					self.ampliarFila()
 					nodo = self.getNodo(self.lengthX,self.lengthY)
 					nodo.nombre = nombre
-					nodo.usuarios.insertar(nombre)
+					nodo.usuarios.insertar(nombre,usuario,password)
 					self.getNodo(self.lengthX,0).empresa = empresa
 					self.getNodo(0,self.lengthY).departamento = departamento
 				else:
@@ -57,7 +57,7 @@ class Matriz(object):
 					departamento = self.departamentoExistente(departamento)
 					nodo = self.getNodo(self.lengthX,departamento.y)
 					nodo.nombre = nombre
-					nodo.usuarios.insertar(nombre)
+					nodo.usuarios.insertar(nombre,usuario,password)
 					self.getNodo(self.lengthX,0).empresa = empresa
 			else:
 				if self.departamentoExistente(departamento) == None:
@@ -67,14 +67,14 @@ class Matriz(object):
 					empresa = self.empresaExistente(empresa)
 					nodo = self.getNodo(empresa.x,self.lengthY)
 					nodo.nombre = nombre
-					nodo.usuarios.insertar(nombre)
+					nodo.usuarios.insertar(nombre,usuario,password)
 					self.getNodo(0,self.lengthY).departamento = departamento
 				else:
 					empresa = self.empresaExistente(empresa)
 					departamento = self.departamentoExistente(departamento)
 					nodo = self.getNodo(empresa.x,departamento.y)
 					#nodo.nombre = nombre
-					nodo.usuarios.insertar(nombre)
+					nodo.usuarios.insertar(nombre,usuario,password)
 					nodo.usuarios.report() 
 #----------------------------------------------Metodo para Reporte
 	def report(self):
@@ -204,29 +204,58 @@ class Matriz(object):
 			rigth.izquierda = nuevo
 
 #---------------------------------------------- Acciones con ACTIVOS
-	def insertarActivo(self,empresa,departamento,nombre,nombreActivo,descripcionActivo,idActivo):
+	def insertarActivo(self,empresa,departamento,usuario,nombreActivo,descripcionActivo,idActivo):
 		empresa = self.empresaExistente(empresa)
 		departamento = self.departamentoExistente(departamento)
-		nodo = self.getNodo(empresa.x,departamento.y)
-		usuario = nodo.usuarios.buscar(nombre)
-		usuario.arbol.insertarNUEVO(nombreActivo,descripcionActivo,idActivo)
+		if (empresa!=None) and (departamento!=None):
+			nodo = self.getNodo(empresa.x,departamento.y)
+			if nodo != None:
+				usuario = nodo.usuarios.buscarUsuario(usuario)
+				if usuario!=None:
+					usuario.arbol.insertarNUEVO(nombreActivo,descripcionActivo,idActivo)
 
-	def obtenerActivo(self,empresa,departamento,nombre,idActivo):
+	def obtenerActivo(self,empresa,departamento,usuario,idActivo):
 		empresa = self.empresaExistente(empresa)
 		departamento = self.departamentoExistente(departamento)
-		nodo = self.getNodo(empresa.x,departamento.y)
-		usuario = nodo.usuarios.buscar(nombre)
-		print(usuario.arbol.buscarIDactivo(idActivo,usuario.arbol.raiz).descripcion)
+		if (empresa!=None) and (departamento!=None):
+			nodo = self.getNodo(empresa.x,departamento.y)
+			if nodo != None:
+				usuario = nodo.usuarios.buscarUsuario(usuario)
+				if usuario!=None:
+					return usuario.arbol.buscarIDactivo(idActivo,usuario.arbol.raiz)
 
-m = Matriz()
-m.Insertar("glorsys","conta","lucas") # Nuevo
-m.Insertar("ofert","ope","marcos") #Ninguno existente
-m.Insertar("cops","secretaria","paula") #Ninugno existente
-m.Insertar("nueva","secretaria","ricarda") #Existente departamento
-m.Insertar("ofert","notariado","denis") #Existente empresa
-m.Insertar("glorsys","conta","Magy") #Existente ambos
-m.insertarActivo("glorsys","conta","Magy","Computadora","Lapto utilizada para saber mas xD","t2y3u4")
-m.obtenerActivo("glorsys","conta","Magy","t2y3u4")
+	def login(self,empresa,departamento,usuario,password):
+		empresa = self.empresaExistente(empresa)
+		departamento = self.departamentoExistente(departamento)
+		if (empresa!=None) and (departamento!=None):
+			nodo = self.getNodo(empresa.x,departamento.y)
+			if nodo != None:
+				return nodo.usuarios.login(usuario,password)
+		return None
+
+	def modifcarActvio(self,empresa,departamento,usuario,idActivo,nombre,descripcion):
+		empresa = self.empresaExistente(empresa)
+		departamento = self.departamentoExistente(departamento)
+		if (empresa!=None) and (departamento!=None):
+			nodo = self.getNodo(empresa.x,departamento.y)
+			if nodo != None:
+				usuario = nodo.usuarios.buscarUsuario(usuario)
+				if usuario!=None:
+					activo = usuario.arbol.buscarIDactivo(idActivo,usuario.arbol.raiz)
+					activo.descripcion = descripcion
+					activo.nombre = nombre
+#m = Matriz()
+#m.Insertar("glorsys","conta","lucas","lc","123d") # Nuevo
+#m.Insertar("ofert","ope","marcos","mc","123") #Ninguno existente
+#m.Insertar("cops","secretaria","paula","p","123") #Ninugno existente
+#m.Insertar("nueva","secretaria","ricarda","r","123") #Existente departamento
+#m.Insertar("ofert","notariado","denis","d","123") #Existente empresa
+#m.Insertar("glorsys","conta","Magy","m","123") #Existente ambos
+#m.insertarActivo("glorsys","conta","lc","Computadora","Lapto utilizada para saber mas xD","t2y3u4")
+#print(m.obtenerActivo("glorsys","conta","lc","t2y3u4").nombre)
+#m.modifcarActvio("glorsys","conta","lc","t2y3u4","dddd","djdjd")
+#print(m.obtenerActivo("glorsys","conta","lc","t2y3u4").nombre)
+#print(m.login("glorsys","conta","lc","123d"))
 #m.report()
 #m.Insertar("oferta","df","lucas")
 #print(m.getNodo(1,1).empresa)
