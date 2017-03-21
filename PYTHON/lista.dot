@@ -6,7 +6,7 @@ rankdir=LR;
  node [color="#31CEF0"];
  edge [color="#31CEF0"];
 0[label="lucas"];
-1[label="Antonio"];
+1[label="Magy"];
 
 0 -> 1;
  }

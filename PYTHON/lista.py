@@ -1,10 +1,12 @@
 import os
+import avl
 class Nodo(object):
 	"""docstring for Nodo"""
 	def __init__(self, valor,indice):
 		self.valor=valor
 		self.indice=indice
 		self.siguiente = None
+		self.arbol = avl.Arbol()
 
 	def getValor(self):
 		return self.valor
@@ -44,10 +46,9 @@ class Lista(object):
 		auxiliar = self.primero
 		while auxiliar != None:
 			if auxiliar.getValor() == valor:
-				print(auxiliar.getIndice())
-				return "EL DATO SE ENCUENTRA EN EL INDICE: "+ str(auxiliar.getIndice())
+				return auxiliar
 			auxiliar = auxiliar.siguiente
-		return "NO SE ENCONTRO EL DATO"
+		return None
 
 	def eliminar(self,valor):
 		print("valor entrante: "+ valor)

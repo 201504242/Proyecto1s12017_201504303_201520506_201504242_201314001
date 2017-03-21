@@ -202,13 +202,31 @@ class Matriz(object):
 			left.derecha = nuevo
 		if rigth != None:
 			rigth.izquierda = nuevo
+
+#---------------------------------------------- Acciones con ACTIVOS
+	def insertarActivo(self,empresa,departamento,nombre,nombreActivo,descripcionActivo,idActivo):
+		empresa = self.empresaExistente(empresa)
+		departamento = self.departamentoExistente(departamento)
+		nodo = self.getNodo(empresa.x,departamento.y)
+		usuario = nodo.usuarios.buscar(nombre)
+		usuario.arbol.insertarNUEVO(nombreActivo,descripcionActivo,idActivo)
+
+	def obtenerActivo(self,empresa,departamento,nombre,idActivo):
+		empresa = self.empresaExistente(empresa)
+		departamento = self.departamentoExistente(departamento)
+		nodo = self.getNodo(empresa.x,departamento.y)
+		usuario = nodo.usuarios.buscar(nombre)
+		print(usuario.arbol.buscarIDactivo(idActivo,usuario.arbol.raiz).descripcion)
+
 m = Matriz()
-m.Insertar("glorsys","conta","lucas")
-m.Insertar("ofert","ope","marcos")
-m.Insertar("cops","secretaria","paula")
-m.Insertar("nueva","secretaria","ricarda")
-m.Insertar("nueva","notariado","denis")
-m.Insertar("glorsys","conta","Antonio")
-m.report()
+m.Insertar("glorsys","conta","lucas") # Nuevo
+m.Insertar("ofert","ope","marcos") #Ninguno existente
+m.Insertar("cops","secretaria","paula") #Ninugno existente
+m.Insertar("nueva","secretaria","ricarda") #Existente departamento
+m.Insertar("ofert","notariado","denis") #Existente empresa
+m.Insertar("glorsys","conta","Magy") #Existente ambos
+m.insertarActivo("glorsys","conta","Magy","Computadora","Lapto utilizada para saber mas xD","t2y3u4")
+m.obtenerActivo("glorsys","conta","Magy","t2y3u4")
+#m.report()
 #m.Insertar("oferta","df","lucas")
 #print(m.getNodo(1,1).empresa)
