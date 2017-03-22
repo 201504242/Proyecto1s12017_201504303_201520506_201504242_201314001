@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class Inicio_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class newLogin_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -60,24 +60,27 @@ public final class Inicio_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>\n");
       out.write("\t\t<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>\n");
       out.write("\n");
-      out.write("\t\t<title>Login</title>\n");
+      out.write("\t\t<title>Inicio</title>\n");
       out.write("\t</head>\n");
-      out.write("    \t<body>\\\n");
+      out.write("    \t<body>\n");
       out.write("            <div class=\"container\">\n");
       out.write("                <div class=\"row main\">\n");
       out.write("                    <div class=\"main-login main-center\">\n");
-      out.write("                        <div class=\"form-group \">\n");
-      out.write("                            <a href=\"crearActivo.jsp\" type=\"button\" id=\"button\" class=\"btn btn-primary btn-lg btn-block login-button\">Agregar Activo</a>\n");
-      out.write("                        </div>\n");
-      out.write("                        <div class=\"form-group \">\n");
-      out.write("                            <a href=\"Login.jsp\" type=\"button\" id=\"button\" class=\"btn btn-primary btn-lg btn-block login-button\">Eliminar Activo</a>\n");
+      out.write("                       <div class=\"form-group\">\n");
+      out.write("                            <label for=\"name\" class=\"cols-sm-2 control-label\">Nombre usuario</label>\n");
+      out.write("                            <div class=\"cols-sm-10\">\n");
+      out.write("                                    <div class=\"input-group\">\n");
+      out.write("                                            <span class=\"input-group-addon\"><i class=\"fa fa-user fa\" aria-hidden=\"true\"></i></span>\n");
+      out.write("                                            <input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"Usuario\"/>\n");
+      out.write("                                    </div>\n");
+      out.write("                            </div>\n");
       out.write("                        </div>\n");
       out.write("                        \n");
       out.write("                        <div class=\"form-group \">\n");
-      out.write("                            <a href=\"Login.jsp\" type=\"button\" id=\"button\" class=\"btn btn-primary btn-lg btn-block login-button\">Modificar la Descripcion de un activo</a>\n");
+      out.write("                            <a href=\"newLogin.jsp\" type=\"button\" id=\"button\" class=\"btn btn-primary btn-lg btn-block login-button\">Modificar la Descripcion de un activo</a>\n");
       out.write("                        </div>\n");
       out.write("                         <div class=\"form-group \">\n");
-      out.write("                            <a href=\"Login.jsp\" type=\"button\" id=\"button\" class=\"btn btn-danger\">Cerrar Sesion</a>\n");
+      out.write("                            <a href=\"newLogin.jsp\" type=\"button\" id=\"button\" class=\"btn btn-danger\">Cerrar Sesion</a>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("            \n");

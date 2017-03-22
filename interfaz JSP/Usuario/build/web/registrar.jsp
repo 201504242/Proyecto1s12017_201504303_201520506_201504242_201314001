@@ -23,68 +23,56 @@
 
 		<title>Registrar</title>
 	</head>
-    	<body>
-		<div class="container">
-			<div class="row main">
-				<div class="main-login main-center">
-				<h3>REGISTRAR </h3>
-					<form class="" method="post" action="#">
-						
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Nombre usuario</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" placeholder="Usuario"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Contraseña</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Contraseña"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="username" class="cols-sm-2 control-label">Empresa</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="Empresa"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="password" class="cols-sm-2 control-label">Departamento</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="Departamento"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group ">
-							<a href="Inicio.jsp" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Crear Cuenta</a>
-						</div>
-                                            
-                                            <div class="form-group ">
-							<a href="Login.jsp" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Regresar a Login</a>
-						</div>
-                                    </form>
-				</div>
-			</div>
-		</div>
-
-		 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-	</body>
+<body>
+    <div class="container">
+        <div class="row main">
+            <div class="main-login main-center">
+                <div class="form-group">
+                    <form action="s" method="POST">                    
+                    <label for="name" class="cols-sm-2 control-label">Nombre usuario</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="nombre" placeholder="Usuario"/>
+                        </div>
+                    </div>
+                    
+                    <label for="name" class="cols-sm-2 control-label">Empresa</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">									
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="Empresa" placeholder="Empresa"/>
+                        </div>
+                    </div>
+                    <label for="name" class="cols-sm-2 control-label">Departamento</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="Departamento" placeholder="Departamento"/>
+                        </div>
+                    </div>
+                    <label for="password" class="cols-sm-2 control-label">Contraseña</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="Contraseña" id="password"  placeholder="Contraseña"/>
+                            </div>
+                        </div>
+                    <br>
+                    <button type="submit" class="btn btn-lg btn-warning">Registrar</button>
+                    </form>
+                    <br>
+                    <form action="newLogin.jsp" method="POST">
+                        <button type="submit" class="btn btn-lg btn-success">Regresar a Login</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+</body>
 </html>

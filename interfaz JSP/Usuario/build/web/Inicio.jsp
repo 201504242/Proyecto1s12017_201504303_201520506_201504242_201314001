@@ -21,9 +21,9 @@
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-		<title>Login</title>
+		<title>Inicio</title>
 	</head>
-    	<body>\
+    	<body>
             <div class="container">
                 <div class="row main">
                     <div class="main-login main-center">
